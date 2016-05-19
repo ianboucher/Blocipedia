@@ -1,0 +1,20 @@
+<h1>Wikis</h1>
+
+<div class="row">
+  <div class="col-md-8">
+
+    <% @wikis.each do |wiki| %>
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%= link_to wiki.title, wiki_path(wiki) %>
+          </h4>
+          <small><%= wiki.body %></small>
+        </div>
+      </div>
+    <% end %>
+
+    <br/>
+    <%= link_to "Create Wiki", new_wiki_path, class: 'btn btn-primary' %>
+  </div>
+</div>
