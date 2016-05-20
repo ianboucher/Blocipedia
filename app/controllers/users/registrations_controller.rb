@@ -11,6 +11,7 @@ def configure_permitted_params
                       :email,
                       :password,
                       :password_confirmation,
+                      :role,
                       :remember_me]
 
   devise_parameter_sanitizer.permit(:sign_up, keys: added_attributes)
