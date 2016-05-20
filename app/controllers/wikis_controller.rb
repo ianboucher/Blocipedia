@@ -13,8 +13,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(wiki_params)
-    @wiki.user = current_user
+    @wiki = current_user.wikis.new(wiki_params)
 
     if @wiki.save
       flash[:notice] = "Your Wiki has been created successfully"
@@ -33,7 +32,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     @wiki.assign_attributes(wiki_params)
 
-    if @wiki.save
+    if @wiki.update(wiki_params)
       flash[:notice] = "Your Wiki was successfully updated"
       redirect_to wiki_path
     else
