@@ -24,7 +24,7 @@ class ChargesController < ApplicationController
       currency:     "usd"
     )
 
-    current_user.role = 1
+    current_user.update(role: :premium)
 
     flash[:notice] = "Thank you for your payment!"
     redirect_to root_path
