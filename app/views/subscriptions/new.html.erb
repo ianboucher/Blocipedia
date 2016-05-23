@@ -1,4 +1,4 @@
-<%= form_tag charges_path do %>
+<%= form_tag subscriptions_path do %>
   <article>
     <% if flash[:error].present? %>
       <div id="error_explanation">
@@ -6,13 +6,15 @@
       </div>
       <% end %>
       <label class="amount">
-        <span>Amount: $15.00</span>
+        <span>Premium Membership - $10 per month</span>
       </label>
     </article>
 
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="<%= @stripe_btn_data[:key] %>"
             data-description="<%= @stripe_btn_data[:description] %>"
+            data-label="Subscribe Now"
+            data-panel-label="Subscribe for $10/month"
             data-amount=<%= @stripe_btn_data[:amount] %>
             data-locale="auto"></script>
 
