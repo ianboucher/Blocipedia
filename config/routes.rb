@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   namespace :stripe do
     resources :subscriptions, only: :create
+    resources :charges, only: :create
   end
 
 end

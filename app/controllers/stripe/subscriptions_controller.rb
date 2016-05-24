@@ -3,7 +3,6 @@ class Stripe::SubscriptionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create
 
   def create
-    # binding.pry
     event = Stripe::Event.retrieve(params[:id])
 
     subscription_id = event.data.object.id
@@ -19,6 +18,6 @@ class Stripe::SubscriptionsController < ApplicationController
     else
       membership.active = true
     end
-    binding.pry
+    
   end
 end

@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524125209) do
+ActiveRecord::Schema.define(version: 20160524195536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "charges", force: :cascade do |t|
+    t.integer  "membership_id"
+    t.string   "transaction_id"
+    t.float    "amount"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "charges", ["membership_id"], name: "index_charges_on_membership_id", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
@@ -66,6 +76,7 @@ ActiveRecord::Schema.define(version: 20160524125209) do
 
   add_index "wikis", ["user_id"], name: "index_wikis_on_user_id", using: :btree
 
+  add_foreign_key "charges", "memberships"
   add_foreign_key "memberships", "users"
   add_foreign_key "wikis", "users"
 end
