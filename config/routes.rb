@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   resources :wikis
 
-  resources :subscriptions, only: [:new, :create, :destroy]
+  resources :subscriptions, only: [:new, :create]
+
+  resources :refunds, only: [:new, :create]
 
   authenticated :user do
     root 'wikis#index', as: :authenticated_root
@@ -15,5 +17,9 @@ Rails.application.routes.draw do
   get 'welcome/about'
 
   root 'welcome#index'
+
+  namespace :stripe do
+    resources :subscriptions, only: :create
+  end
 
 end
