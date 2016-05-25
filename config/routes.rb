@@ -8,11 +8,7 @@ Rails.application.routes.draw do
 
   resources :wikis
 
-  resources :subscriptions, only: [:new, :create]
-
-  resources :invoices, only: [:new, :create]
-
-  resources :refunds, only: [:new, :create]
+  resources :memberships, only: [:new, :create, :destroy]
 
   authenticated :user do
     root 'wikis#index', as: :authenticated_root
@@ -23,8 +19,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   namespace :stripe do
-    resources :subscriptions, only: :create
-    resources :invoices, only: :create
+    resources :subscription_events, only: :create
   end
 
 end

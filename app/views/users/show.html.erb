@@ -5,8 +5,8 @@
 
     <br/>
 
-    <%= link_to "Downgrade to Standard", refunds_path(current_user),
-      data: { confirm: "Are you sure? All your private Wikis will become public" }, method: :create, class: 'btn btn-primary' %>
-      <%#binding.pry%>
+    <%= link_to "Downgrade to Standard", membership_path(current_user),
+      data: { confirm: "Are you sure? All your private Wikis will be made public" },
+        method: :delete, class: 'btn btn-primary' %>
   </div>
 </div>

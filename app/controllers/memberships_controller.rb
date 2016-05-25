@@ -1,9 +1,8 @@
-class SubscriptionsController < ApplicationController
+class MembershipsController < ApplicationController
 
   require 'stripe'
 
   def new
-
     @membership = Membership.new
 
     # Make data available to Stripe Checkout.js in view
@@ -11,11 +10,9 @@ class SubscriptionsController < ApplicationController
       key: "#{ Rails.configuration.stripe[:publishable_key] }",
       description: "Blocipedia Premium",
     }
-
   end
 
   def create
-
     # Retrieve existing Stripe customer or create a new one
     customer = if current_user.customer_id?
                  Stripe::Customer.retrieve(current_user.customer_id)
@@ -48,6 +45,19 @@ class SubscriptionsController < ApplicationController
     rescue Stripe::CardError => e
       flash[:alert] = e.message
       redirect_to new_subscription_path
+  end
 
+  def destroy
+    # Retrieve the user's subscription from Stripe and cancel it
+    @membership = current_user.membership
+    subscription = Stripe::Subscription.retrieve(@membership.subscribe_id)
+
+    if subscription.delete(at_period_end: true)
+      flash[:notice] = "Your subscription has been cancelled.
+        Your wikis will become public at the end of the current billing period"
+      redirect_to root_path
+    else
+      flash[:alert] = "There was an error cancelling your subscription. Please try again"
+    end
   end
 end

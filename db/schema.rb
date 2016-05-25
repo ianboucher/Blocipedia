@@ -11,30 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525100852) do
+ActiveRecord::Schema.define(version: 20160524125209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "invoices", force: :cascade do |t|
-    t.string   "ref_no"
-    t.string   "charge_id"
-    t.float    "amount"
-    t.integer  "membership_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "invoices", ["membership_id"], name: "index_invoices_on_membership_id", using: :btree
-
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
-    t.boolean  "active",       default: false, null: false
+    t.boolean  "active",               default: false, null: false
+    t.boolean  "cancel_at_period_end", default: false, null: false
     t.datetime "active_until"
     t.string   "status"
     t.string   "subscribe_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
@@ -77,7 +67,6 @@ ActiveRecord::Schema.define(version: 20160525100852) do
 
   add_index "wikis", ["user_id"], name: "index_wikis_on_user_id", using: :btree
 
-  add_foreign_key "invoices", "memberships"
   add_foreign_key "memberships", "users"
   add_foreign_key "wikis", "users"
 end
