@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :wikis
   has_one  :membership
-  has_many :charges, :through => :membership
+  has_many :invoices, :through => :membership
 
   enum role: [:standard, :premium, :admin]
 
