@@ -15,6 +15,7 @@ gem 'devise'
 gem 'faker'
 gem 'pg', '~> 0.15'
 gem 'pundit'
+gem 'stripe'
 
 group :production do
   gem 'rails_12factor'

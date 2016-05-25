@@ -34,7 +34,7 @@
       <div class="pull-right user-info">
         <%= gravatar_url(current_user, 35) %>
         <div class="pull-right">
-          <%= link_to current_user.username, edit_user_registration_path, class: "navbar-link" %><br/>
+          <%= link_to current_user.username, user_path(current_user), class: "navbar-link" %><br/>
           <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "navbar-link" %>
         </div>
       </div>
