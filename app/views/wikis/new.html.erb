@@ -12,7 +12,13 @@
 
       <%= form_group_tag(@wiki.errors[:body]) do %>
         <%= f.label :body %>
-        <%= f.text_field :body, rows: 8, class: 'form-control', placeholder: "Enter your Wiki text here" %>
+        <%= f.text_area :body, rows: 20, class: 'form-control', placeholder: "Enter your Wiki text here" %>
+      <% end %>
+
+      <% if current_user.admin? || current_user.premium? %>
+          <%= f.label :private, class: 'checkbox col-md-4' do %>
+            <%= f.check_box :private %> Private Wiki
+          <% end %>
       <% end %>
 
       <div class="form-group">

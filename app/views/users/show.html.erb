@@ -42,13 +42,17 @@
 
     <br/>
     <h4 class="media-heading">And Your Private Wikis...</h4>
-      <% current_user.wikis.where(private: true).each do |wiki| %>
-        <div class="media">
-          <div class="media-body">
-            <h5 class="media-heading"><%= link_to wiki.title, wiki_path(wiki) %></h5>
-              <small><%= wiki.body[0..100] %>...</small>
+      <% if current_user.standard? %>
+        <p>You need a Premium membership to use private Wikis. Subscribe above!</p>
+      <% else %>
+        <% current_user.wikis.where(private: true).each do |wiki| %>
+          <div class="media">
+            <div class="media-body">
+              <h5 class="media-heading"><%= link_to wiki.title, wiki_path(wiki) %></h5>
+                <small><%= wiki.body[0..100] %>...</small>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
 
   </div>
