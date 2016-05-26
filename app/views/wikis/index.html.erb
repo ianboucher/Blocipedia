@@ -1,5 +1,21 @@
-<h1>Wikis</h1>
-<%= link_to "Upgrade to Premium", new_membership_path, class: 'btn btn-primary pull-right' %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="media-left">
+      <h1>Wikis</h1>
+    </div>
+
+    <div class="media-body">
+      <div class="pull-right">
+        <br/>
+        <%= link_to "Create Wiki", new_wiki_path, class: 'btn btn-primary' %>
+
+        <% if current_user.standard? %>
+          <%= link_to "Upgrade to Premium", new_membership_path, class: 'btn btn-primary' %>
+        <% end %>
+
+      </div>
+    </div>
+
 <br/>
 
 <div class="row">
@@ -17,6 +33,5 @@
     <% end %>
 
     <br/>
-    <%= link_to "Create Wiki", new_wiki_path, class: 'btn btn-primary' %>
   </div>
 </div>
