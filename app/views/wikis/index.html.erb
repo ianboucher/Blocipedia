@@ -23,11 +23,8 @@
     <% @wikis.each do |wiki| %>
       <div class="media">
         <div class="media-body">
-          <h4 class="media-heading">
-            <% link_text = wiki.private? ? wiki.title + " - Private by #{wiki.user.username}" : wiki.title %>
-            <%= link_to link_text, wiki_path(wiki) %>
-          </h4>
-          <small><%= wiki.body[0..100] %>...</small>
+          <h4 class="media-heading"><%= link_to wiki.title, wiki_path(wiki) %></h4>
+          <small><%= markdown(wiki.body.truncate_words(15)) %></small>
         </div>
       </div>
     <% end %>

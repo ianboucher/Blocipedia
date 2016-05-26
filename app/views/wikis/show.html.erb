@@ -5,13 +5,13 @@
 
 <div class="row">
   <div class="col-md-8">
-    <%= @wiki.body %>
+    <%= markdown(@wiki.body) %>
   </div>
 
   <br/>
 
   <div class="col-md-4">
-    <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-primary' %>    
+    <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-primary' %>
     <% if current_user.admin? || (current_user.premium? && @wiki.user_id == current_user.id) %>
       <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger',
         data: { confim: "Are you sure you want to delete this Wiki?" } %>

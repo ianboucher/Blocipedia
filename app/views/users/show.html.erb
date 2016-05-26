@@ -35,7 +35,7 @@
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading"><%= link_to wiki.title, wiki_path(wiki) %></h5>
-              <small><%= wiki.body[0..100] %>...</small>
+              <small><%= markdown(wiki.body.truncate_words(15)) %></small>
           </div>
         </div>
       <% end %>
@@ -49,7 +49,7 @@
           <div class="media">
             <div class="media-body">
               <h5 class="media-heading"><%= link_to wiki.title, wiki_path(wiki) %></h5>
-                <small><%= wiki.body[0..100] %>...</small>
+                <small><%= markdown(wiki.body.truncate_words(15)) %></small>
             </div>
           </div>
         <% end %>
