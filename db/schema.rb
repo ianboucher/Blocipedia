@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524125209) do
+ActiveRecord::Schema.define(version: 20160527145218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collaborations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "wiki_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "collaborations", ["user_id"], name: "index_collaborations_on_user_id", using: :btree
+  add_index "collaborations", ["wiki_id"], name: "index_collaborations_on_wiki_id", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
@@ -67,6 +77,8 @@ ActiveRecord::Schema.define(version: 20160524125209) do
 
   add_index "wikis", ["user_id"], name: "index_wikis_on_user_id", using: :btree
 
+  add_foreign_key "collaborations", "users"
+  add_foreign_key "collaborations", "wikis"
   add_foreign_key "memberships", "users"
   add_foreign_key "wikis", "users"
 end

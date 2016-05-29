@@ -21,6 +21,16 @@
           <% end %>
       <% end %>
 
+      <% if current_user.premium? && @wiki.user_id == current_user.id %>
+        <div class="form-group">
+          <%= f.label :collaborations  %>
+          <%= f.text_field :collaborations,
+                            class: 'form-control',
+                            placeholder: "Enter usernames (separated by commas)",
+                            value: @wiki.collaborating_users.map(&:username).join(", ") %>
+        </div>
+      <% end %>
+
       <div class="form-group">
         <%= f.submit "Save", class: 'btn btn-success' %>
       </div>
