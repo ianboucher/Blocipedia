@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :memberships, only: [:new, :create, :destroy]
 
-  resources :wikis 
+  resources :wikis
 
   authenticated :user do
     root 'wikis#index', as: :authenticated_root
