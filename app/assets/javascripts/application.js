@@ -14,4 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require bootstrap-sprockets
+//= require twitter/typeahead
+//= require users
+//= require wikis
 //= require_tree .

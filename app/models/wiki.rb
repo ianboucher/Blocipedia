@@ -1,4 +1,5 @@
 class Wiki < ActiveRecord::Base
+  searchkick autocomplete: ['title']
 
   belongs_to :user
   has_many   :collaborations

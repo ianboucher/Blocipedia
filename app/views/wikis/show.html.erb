@@ -28,12 +28,12 @@
       </h5>
 
         <div class="form-group">
-          <%= form_for :user, url: wiki_collaborations_path(@wiki) do |user| %>
-            <%= user.text_field :username, class: 'form-control',
-              placeholder: "Enter their usernames (separated by commas)" %>
+          <%= form_tag wiki_collaborations_path(@wiki), method: :post do %>
+            <%= text_field_tag :query, params[:query], class: 'form-control typeahead-user' %>
+            <%= submit_tag 'Add', class: 'btn btn-primary' %>
+          <% end %>
         </div>
-          <%= user.submit "Add Collaborators", class: 'btn btn-primary' %>
-        <% end %>
+
       <% end %>
     </div>
 

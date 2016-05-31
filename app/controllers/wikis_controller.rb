@@ -1,7 +1,17 @@
 class WikisController < ApplicationController
 
   def index
-    @wikis = policy_scope(Wiki)
+    if params[:query].present?
+      @wikis = Wiki.search(params[:query]) #not sure how to combine with Pundit
+    else
+      @wikis = policy_scope(Wiki)
+    end
+  end
+
+  def autocomplete
+    render json: Wiki.search(params[:query], autocomplete: true, limit: 10).map do |wiki|
+      { title: wiki.title, value: wiki.id }
+    end
   end
 
   def show

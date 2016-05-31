@@ -17,6 +17,9 @@ gem 'pg', '~> 0.15'
 gem 'pundit'
 gem 'stripe'
 gem 'redcarpet', '~> 3.3', '>= 3.3.4'
+gem 'searchkick'
+gem 'twitter-typeahead-rails'
+
 
 group :production do
   gem 'rails_12factor'
