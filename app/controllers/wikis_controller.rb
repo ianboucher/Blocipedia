@@ -15,8 +15,6 @@ class WikisController < ApplicationController
 
   def create
     @wiki = current_user.wikis.new(wiki_params)
-    @wiki.collaborations = Collaboration.update_collaborations(
-      params[:wiki][:collaborations], @wiki)
 
     if @wiki.save
       flash[:notice] = "Your Wiki has been created successfully"
@@ -29,13 +27,12 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @users = User.all
   end
 
   def update
     @wiki = Wiki.find(params[:id])
     authorize @wiki
-    @wiki.collaborations = Collaboration.update_collaborations(
-      params[:wiki][:collaborations], @wiki) if @wiki.user_id == current_user.id
 
     if @wiki.update(wiki_params)
       flash[:notice] = "Your Wiki was successfully updated"

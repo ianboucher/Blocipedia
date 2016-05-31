@@ -13,4 +13,8 @@ module ApplicationHelper
     css_class << ' has-error' if errors.any?
     content_tag :div, capture(&block), class: css_class
   end
+
+  def authorize_view_element
+    current_user.admin? || (current_user.premium? && @wiki.user_id = current_user.id)
+  end
 end

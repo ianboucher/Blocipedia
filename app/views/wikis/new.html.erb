@@ -15,21 +15,10 @@
         <%= f.text_area :body, rows: 20, class: 'form-control', placeholder: "Enter your Wiki text here" %>
       <% end %>
 
-      <% if current_user.admin? || current_user.premium? %>
+      <% if authorize_view_element %>
           <%= f.label :private, class: 'checkbox col-md-4' do %>
             <%= f.check_box :private %> Private Wiki
           <% end %>
-      <% end %>
-
-      <!-- This is not much use on the 'new wiki' form. How could I get Collaboration
-      form to appear if 'Private' check_box is checked? AJAX?-->
-      <% if @wiki.private? %>
-        <div class="form-group">
-          <%= f.label :collaborations  %>
-          <%= f.text_field :collaborations,
-                            class: 'form-control',
-                            placeholder: "Enter usernames (separated by commas)" %>
-        </div>
       <% end %>
 
       <div class="form-group">
@@ -37,5 +26,6 @@
       </div>
 
     <% end %>
+    
   </div>
 </div>

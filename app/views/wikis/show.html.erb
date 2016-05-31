@@ -12,9 +12,30 @@
 
   <div class="col-md-4">
     <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-primary' %>
-    <% if current_user.admin? || (current_user.premium? && @wiki.user_id == current_user.id) %>
+    <% if authorize_view_element %>
       <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger',
         data: { confim: "Are you sure you want to delete this Wiki?" } %>
     <% end %>
+
+
+    <div class="media">
+      <h5><%= list_collaborators(@wiki.collaborating_users, @wiki) %>
+
+      <% if authorize_view_element %>
+        <% if @wiki.collaborating_users.any? %>
+          <%= link_to "Remove someone", wiki_collaborations_path(@wiki) %> or add more collaborators below:
+        <% end %>
+      </h5>
+
+        <div class="form-group">
+          <%= form_for :user, url: wiki_collaborations_path(@wiki) do |user| %>
+            <%= user.text_field :username, class: 'form-control',
+              placeholder: "Enter their usernames (separated by commas)" %>
+        </div>
+          <%= user.submit "Add Collaborators", class: 'btn btn-primary' %>
+        <% end %>
+      <% end %>
+    </div>
+
   </div>
 </div>
