@@ -16,6 +16,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+// @import "typeaheadjs.scss";
 
 .gravatar {
   margin-top: 0.2em;
@@ -41,8 +42,4 @@
 
 .form-narrow {
   max-width: 30em;
-}
-
-.spacing {
-  min-width: 5em;
 }

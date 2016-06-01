@@ -1,5 +1,7 @@
 class WikisController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
     if params[:query].present?
       @wikis = Wiki.search(params[:query]) #not sure how to combine with Pundit

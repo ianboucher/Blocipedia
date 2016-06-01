@@ -1,59 +1,61 @@
+<br/>
+
+<div class="media-left">
+  <%= gravatar_url(current_user, 128) %>
+</div>
+
+<div class="media-body">
+  <div class="pull-right">
+
+    <%= link_to "Edit Your Details", edit_user_registration_path, class: 'btn btn-primary' %>
+
+    <% if current_user.standard? %>
+      <%= link_to "Upgrade to Premium", new_membership_path, class: 'btn btn-primary' %>
+    <% elsif current_user.premium? %>
+      <%= link_to "Downgrade to Standard", membership_path(current_user),
+        data: { confirm: "Are you sure? All your private Wikis will be made public" },
+          method: :delete, class: 'btn btn-primary' %>
+    <% end %>
+
+  </div>
+
+    <h2 class="media-heading"><%= current_user.username %></h2>
+    <small>
+      <%= pluralize(current_user.wikis.count, 'wiki') %> created <br/>
+      Member since <%=current_user.created_at.strftime("%B %d, %Y") %>
+    </small>
+
+  </div>
+
 <div class="row">
-  <div class="col-md-4">
-    <br/>
+  <div class="col-md-8">
+  <br/>
 
-    <div class="media-left">
-      <%= gravatar_url(current_user, 128) %>
-    </div>
-
-    <div class="media-body">
-      <div class="pull-right">
-
-        <%= link_to "Edit Your Details", edit_user_registration_path, class: 'btn btn-primary' %>
-
-        <% if current_user.standard? %>
-          <%= link_to "Upgrade to Premium", new_membership_path, class: 'btn btn-primary' %>
-        <% elsif current_user.premium? %>
-          <%= link_to "Downgrade to Standard", membership_path(current_user),
-            data: { confirm: "Are you sure? All your private Wikis will be made public" },
-              method: :delete, class: 'btn btn-primary' %>
-        <% end %>
-
+  <h4 class="media-heading">Your Public Wikis...</h4>
+    <% current_user.wikis.where(private: false).each do |wiki| %>
+      <div class="media">
+        <div class="media-body">
+          <h5 class="media-heading"><%= link_to wiki.title, wiki_path(wiki) %></h5>
+            <small><%= wiki.body.truncate_words(15) %></small>
+        </div>
       </div>
+    <% end %>
 
-      <h2 class="media-heading"><%= current_user.username %></h2>
-      <small>
-        <%= pluralize(current_user.wikis.count, 'wiki') %> created <br/>
-        Member since <%=current_user.created_at.strftime("%B %d, %Y") %>
-      </small>
+  <br/>
 
-    </div>
-
-    <br/>
-    <h4 class="media-heading">Your Public Wikis...</h4>
-      <% current_user.wikis.where(private: false).each do |wiki| %>
+  <h4 class="media-heading">And Your Private Wikis...</h4>
+    <% if current_user.standard? %>
+      <p>You need a Premium membership to use private Wikis. Subscribe above!</p>
+    <% else %>
+      <% current_user.wikis.where(private: true).each do |wiki| %>
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading"><%= link_to wiki.title, wiki_path(wiki) %></h5>
-              <small><%= markdown(wiki.body.truncate_words(15)) %></small>
+              <small><%= wiki.body.truncate_words(15) %></small>
           </div>
         </div>
       <% end %>
-
-    <br/>
-    <h4 class="media-heading">And Your Private Wikis...</h4>
-      <% if current_user.standard? %>
-        <p>You need a Premium membership to use private Wikis. Subscribe above!</p>
-      <% else %>
-        <% current_user.wikis.where(private: true).each do |wiki| %>
-          <div class="media">
-            <div class="media-body">
-              <h5 class="media-heading"><%= link_to wiki.title, wiki_path(wiki) %></h5>
-                <small><%= markdown(wiki.body.truncate_words(15)) %></small>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+    <% end %>
 
   </div>
 </div>

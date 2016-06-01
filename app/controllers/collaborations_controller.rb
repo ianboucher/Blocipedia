@@ -1,5 +1,7 @@
 class CollaborationsController < ApplicationController
 
+  before action :authenicate_user!
+
   def index
     @wiki = Wiki.find(params[:wiki_id])
     @collaborators = @wiki.collaborating_users
@@ -7,11 +9,9 @@ class CollaborationsController < ApplicationController
 
   def create
     @wiki = Wiki.find(params[:wiki_id])
-    # Take username from search query and turn into user_id
-    collaborator_ids = (User.where(username: params[:query])).ids
-    collaborator_ids << @wiki.user_id unless collaborator_ids.empty?
-    # not sure how to authorize using Pundit here. Needs work.
-    if @wiki.collaborating_user_ids += collaborator_ids
+    collaborator = User.find_by(username: params[:query])
+    # Still not sure how to authorize using Pundit here.
+    if @wiki.collaborating_users << collaborator
       flash[:notice] = "Collaborators added successfully"
       redirect_to wiki_path(@wiki)
     else

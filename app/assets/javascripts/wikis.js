@@ -1,3 +1,4 @@
+// Provide search suggestion/autocompletion for wikis
 var ready;
 ready = function() {
     var engine = new Bloodhound({
@@ -18,7 +19,7 @@ ready = function() {
         .done(function() { console.log('success!'); })
         .fail(function() { console.log('err!'); });
 
-    $('.typeahead-wiki').typeahead(null, {
+    $('.search-wiki').typeahead(null, {
         name: 'engine',
         displayKey: 'title',
         source: engine.ttAdapter()
@@ -28,32 +29,27 @@ ready = function() {
 $(document).ready(ready);
 $(document).on('page:load', ready);
 
-// $(document).ready(function(){
-//   var converter = new Showdown.converter()
-//     $('#wiki_body').keyup(function() {
-//       var content = $('#wiki_body').val()
-//       $('#preview_text').text(
-//         converter.makeHtml(content)
-//       );
-//     });
-// });
 
+// Parse markdown using Showdown
+function parseMarkdown(source, target) {
+  if (document.getElementById(source)) {
+    var input =  document.getElementById(source).value ||
+                 document.getElementById(source).innerHTML,
+        target = document.getElementById(target),
+        converter = new Showdown.converter();
+        html = converter.makeHtml(input);
+        target.innerHTML = html;
+      }
+};
+
+// Provide live preview of markdown in wiki edit/create page
 $(document).ready(function(){
   $('#wiki_body').keyup(function() {
-  var input = document.getElementById('wiki_body').value,
-      target = document.getElementById('preview_text'),
-      converter = new Showdown.converter();
-      html = converter.makeHtml(input);
-
-      target.innerHTML = html
-    })
+    var html = parseMarkdown('wiki_body', 'preview_text')
+  });
 });
 
+// Parse markdown on page load for wiki show page
 $(document).ready(function(){
-  var input = document.getElementById('show_wiki').value,
-      target = document.getElementById('show_wiki'),
-      converter = new Showdown.converter();
-      html = converter.makeHtml(input);
-
-      target.innerHTML = html
+    var html = parseMarkdown('show_wiki', 'show_wiki')
 });

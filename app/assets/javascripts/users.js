@@ -1,3 +1,4 @@
+// Provide suggestions/autocompletion for user search
 var ready;
 ready = function() {
     var engine = new Bloodhound({
@@ -18,7 +19,7 @@ ready = function() {
         .done(function() { console.log('success!'); })
         .fail(function() { console.log('err!'); });
 
-    $('.typeahead-user').typeahead(null, {
+    $('.search-user').typeahead(null, {
         name: 'engine',
         displayKey: 'username',
         source: engine.ttAdapter()

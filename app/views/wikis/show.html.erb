@@ -7,10 +7,10 @@
   <div class="col-md-8">
     <div id='show_wiki'><%= @wiki.body %></div>
   </div>
+</div>
 
   <br/>
 
-  <div class="col-md-4">
     <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-primary' %>
     <% if authorize_view_element %>
       <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger',
@@ -29,13 +29,10 @@
 
         <div class="form-group">
           <%= form_tag wiki_collaborations_path(@wiki), method: :post do %>
-            <%= text_field_tag :query, params[:query], class: 'form-control typeahead-user' %>
+            <%= text_field_tag :query, params[:query], class: 'form-control search-user' %>
             <%= submit_tag 'Add', class: 'btn btn-primary' %>
           <% end %>
         </div>
 
       <% end %>
     </div>
-
-  </div>
-</div>

@@ -16,10 +16,10 @@ gem 'faker'
 gem 'pg', '~> 0.15'
 gem 'pundit'
 gem 'stripe'
-gem 'redcarpet', '~> 3.3', '>= 3.3.4'
 gem 'searchkick'
 gem 'twitter-typeahead-rails'
 gem 'showdown-rails'
+gem 'jquery-turbolinks'
 
 group :production do
   gem 'rails_12factor'

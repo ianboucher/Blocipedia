@@ -1,6 +1,7 @@
 class MembershipsController < ApplicationController
-
   require 'stripe'
+
+  before_action :authenicate_user!
 
   def new
     @membership = Membership.new

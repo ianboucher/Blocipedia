@@ -1,26 +1,25 @@
-<div class="row">
-  <div class="col-md-4">
-    <div class="media-left">
-      <h1>Wikis</h1>
-    </div>
+<div class="media-left">
+  <h1>Wikis</h1>
+</div>
 
-    <div class="media-body">
-      <div class="pull-right">
-        <br/>
+<div class="media-body">
+  <div class="pull-right">
+    <br/>
 
-        <%= link_to "Create Wiki", new_wiki_path, class: 'btn btn-primary' %>
-        <% if current_user.standard? %>
-          <%= link_to "Upgrade to Premium", new_membership_path, class: 'btn btn-primary' %>
-        <% end %>
-      </div>
-    </div>
+    <%= link_to "Create Wiki", new_wiki_path, class: 'btn btn-primary' %>
+    <% if current_user.standard? %>
+      <%= link_to "Upgrade to Premium", new_membership_path, class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+<br/>
 
-    <div class="form-group">
-      <%= form_tag wikis_path, method: :get do %>
-        <%= text_field_tag :query, params[:query], class: 'form-control typeahead-wiki'%>
-        <%= submit_tag 'Search', class: 'btn btn-primary' %>
-      <% end %>
-    </div>
+<div class="form-group form-narrow">
+  <%= form_tag wikis_path, method: :get do %>
+    <%= text_field_tag :query, params[:query], class: 'form-control search-wiki'%>
+    <%= submit_tag 'Search', class: 'btn btn-primary' %>
+  <% end %>
+</div>
 
 <br/>
 
@@ -31,7 +30,7 @@
       <div class="media">
         <div class="media-body">
           <h4 class="media-heading"><%= link_to wiki.title, wiki_path(wiki) %></h4>
-          <small><%= markdown(wiki.body.truncate_words(15)) %></small>
+          <small><%= wiki.body.truncate_words(15) %></small>
         </div>
       </div>
     <% end %>

@@ -1,7 +1,7 @@
 <h1>Create a new Wiki</h1>
-
+<br/>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-8">
 
     <%= form_for @wiki do |f| %>
     <!-- use form_group_tag from ApplicationHelper to display errors -->
@@ -15,21 +15,27 @@
         <%= f.text_area :body, rows: 10, class: 'form-control', placeholder: "Enter your Wiki text here" %>
       <% end %>
 
-      <div class="form-group">
-        <div id="preview_text"></div>
-      </div>
+    <div class="form-group">
+      <div id="preview_text"></div>
+    </div>
 
+  </div>
+</div>
+
+  <div class="col-md-8">
+    <div class="row">
       <% if authorize_view_element %>
           <%= f.label :private, class: 'checkbox col-md-4' do %>
             <%= f.check_box :private %> Private Wiki
           <% end %>
       <% end %>
+    </div>
 
+    <div class="row">
       <div class="form-group">
         <%= f.submit "Save", class: 'btn btn-success' %>
       </div>
+    </div>
 
     <% end %>
-
   </div>
-</div>
