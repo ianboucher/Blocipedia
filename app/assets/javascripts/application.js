@@ -18,4 +18,5 @@
 //= require twitter/typeahead
 //= require users
 //= require wikis
+//= require showdown
 //= require_tree .

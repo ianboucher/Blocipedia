@@ -12,8 +12,12 @@
 
       <%= form_group_tag(@wiki.errors[:body]) do %>
         <%= f.label :body %>
-        <%= f.text_area :body, rows: 20, class: 'form-control', placeholder: "Enter your Wiki text here" %>
+        <%= f.text_area :body, rows: 12, class: 'form-control body-text', placeholder: "Enter your Wiki text here" %>
       <% end %>
+
+      <div class="form-group">
+        <div id="preview_text"></div>
+      </div>
 
       <% if authorize_view_element %>
           <%= f.label :private, class: 'checkbox col-md-4' do %>

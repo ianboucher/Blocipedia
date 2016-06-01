@@ -200,6 +200,9 @@ GEM
     shoulda-context (1.2.1)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    showdown-rails (0.0.4)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
     slop (3.6.0)
     spring (1.7.1)
     spring-commands-rspec (1.0.4)
@@ -260,6 +263,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   searchkick
   shoulda
+  showdown-rails
   spring
   spring-commands-rspec
   stripe

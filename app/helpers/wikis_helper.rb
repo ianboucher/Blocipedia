@@ -14,7 +14,7 @@ module WikisHelper
       autolink:            true,
       superscript:         true,
       no_intra_emphasis:   true,
-      disable_indented_code_blocks: true
+      # disable_indented_code_blocks: true
     }
 
     renderer = Redcarpet::Render::HTML.new(options)
